@@ -1,0 +1,152 @@
+@import url(http://fonts.googleapis.com/css?family=BenchNine:400,300,700);
+
+html, body{
+	font-family: 'BenchNine', sans-serif;
+	height: 100%;
+	color: #fff;
+	background: #000;
+}
+
+.header {
+	height: 30pt;
+	margin: 0;
+	padding: 0;
+}
+
+.header p{
+	margin: 0;
+	padding: 0;
+	font-size: 24pt;
+	font-weight:700;
+}
+
+.header #title{
+	float: left;
+	margin-left: 20px;
+}
+
+#menu{
+	float: right;
+	margin-right: 20px;
+}
+
+.sidebar{
+	float:left;
+	width: 25%;
+}
+.sidebar #banner{
+	width: 100%;
+}
+.sidebar #poster{
+	float: left;
+	width: 50%;
+}
+.sidebar #details{
+	float: left;
+	clear: right;
+}
+.sidebar p{
+	padding: 0;
+	margin: 0;
+	padding-left: 5px;
+}
+.sidebar #rating{
+	position: relative;
+}
+.sidebar #rating div{
+	position: absolute;
+	left: 5px;
+	top: 16pt;
+}
+.sidebar #plot{
+	clear:both;
+}
+.sidebar #title{
+	font-size: 18pt;
+}
+
+.content{
+	float:left;
+	position: relative;
+	width: 75%;
+}
+
+.content img{
+	width: 100%;
+}
+
+.infobar{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 50px;
+	width: 100%;
+	background: black;
+	opacity:0.5;
+	margin: 0;
+	padding: 0;
+}
+#ib_info{
+	color: #fff;
+	position: relative;
+	font-size: 18pt;
+	margin: 0;
+	padding: 0;
+}
+#ib_info p{
+	margin: 10px 0 0 0;
+}
+#ib_info #notv{
+	position: absolute;
+	left: 48%;
+	text-align: center;
+}
+#ib_info #date{
+	position: absolute;
+	right: 1%;
+	text-transform:uppercase;
+}
+
+.showbar{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	height: 140px;
+	width: 100%;
+	background: black;
+	opacity:0.8;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+}
+#sb_info{
+	color: #fff;
+	position: relative;
+	font-size: 18pt;
+	margin: 0;
+	padding: 0;
+}
+#sb_info p{
+	position: absolute;
+	margin: 10px 0 0 0;
+}
+#sb_info #stitle{
+	font-size: 28pt;
+	left: 10%;
+	text-align: center;
+}
+#sb_info #sgenre{
+	left: 10%;
+	top: 60px;
+}
+#sb_info #sepno{
+	left: 10%;
+	top: 90px
+}
+
+.footer {
+	clear: both;
+	position: relative;
+	font-size: 12px;
+	float: right;
+}
