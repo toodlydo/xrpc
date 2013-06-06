@@ -4,7 +4,7 @@
 */
 	$XBMC_USER = "xbmc";
 	$XBMC_PASS = "xbmc";
-	$XBMC_IP = "localhost";
+	$XBMC_IP = "192.168.0.101";
 	$XBMC_PORT = "81";
 	$url = "";
 
