@@ -2,7 +2,9 @@
 /*
 	Main
 */
-	include 'settings.php';
+	session_start();
+	require 'settings.php';
+	GLOBAL $response;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
@@ -10,9 +12,11 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>XBMC Database Explorer</title>
 		<link type="text/css" rel="stylesheet" href="styles/style.css" />
+		<link type="text/css" rel="stylesheet" href="styles/remote_style.css" />
 		<link rel="shortcut icon" href="icon/favicon.ico" type="image/x-icon" />
 		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
+		<script type="text/javascript" src="js/remote.js"></script>
 	</head>
 
 	<body>
@@ -41,52 +45,26 @@
 		$rawresponse = getjsonrpc($request, $url);
 		//var_dump($rawresponse);
 		$response = json_decode($rawresponse, true);
-		
+		$_SESSION['response'] = $response;
 		echo '<script> var response = \''.str_replace("'","\\'",$rawresponse).'\';</script>';
 	?>
 
 		<hr>
 		<div class="header">
 			<p id="title">XBMC Database Explorer</p><span>Beta</span>
-			<p id="menu">TV SHOWS</p>
+			<div id='cssmenu'>
+				<ul>
+					<li class='active'><a href='index.php' id="mhome"><span>Home</span></a></li>
+					<li class=''><a href='#' id="mtv"><span>TV Shows</span></a></li>
+					<li class=''><a href='#' id="mmovie"><span>Movies</span></a></li>
+					<li class=''><a href='#' id="mmusic"><span>Music</span></a></li>
+					<li class=''><a href='#' id="mremote"><span>Remote</span></a></li>
+					<li class='last'><a href='#' id="mhome"><span>Exit</span></a></li>
+				</ul>
+			</div>
 		</div>
 		<hr>
-		<div class="sidebar">
-			<img id="banner" src="<?php echo substr(urldecode(explode("://",$response["result"]["tvshows"][0]["art"]["banner"])[1]), 0, -1);?>"/>
-			<img id="poster" src="<?php echo substr(urldecode(explode("://",$response["result"]["tvshows"][0]["art"]["poster"])[1]), 0, -1);?>"/>
-			<div id="details">
-				<div id="title"><p><?php echo $response["result"]["tvshows"][0]["label"];?></p></div>
-				<div id="year"><p>Year: <?php echo $response["result"]["tvshows"][0]["year"];?></p></div>
-				<div id="rating"><p>Rating: 
-				<?php // put filled stars above blank stars and set visiblity to that of rating.
-					$starNumber = round($response["result"]["tvshows"][0]["rating"], 1);
-					echo $starNumber.'</p>';
-					echo '<div style="z-index: 1;"><img style="z-index: 1;" src="img/stars_empty.png" /></div>';
-					$fullwidth = 160* $starNumber / 10;
-					echo '<div style="z-index: 2; width:'.$fullwidth.'px; overflow:hidden;"> <img src="img/stars_full.png" /></div>';
-				?></div>
-				
-			</div>
-			<div id="plot"><h3>Plot: </h3><p><?php echo $response["result"]["tvshows"][0]["plot"];?></p></div>
-			<img id="prev" onclick="loadpn(response,0, i);" style="float: left; width: 50px; margin-top: 50px;" src="img/left_black.png" alt="Prev"/>
-			<img id="next" onclick="loadpn(response,1, i);" style="float: right; width: 50px; margin-top: 50px;" src="img/right_black.png" alt="Next"/>
-		</div>
-		<div class="content">
-			<img id="fanart" src="<?php echo substr(urldecode(explode("://",$response["result"]["tvshows"][0]["art"]["fanart"])[1]), 0, -1);?>"/>
-			<div class="infobar">
-				<div id="ib_info">
-					<p id="notv"><?php echo count($response["result"]["tvshows"]); ?> TV SHOWS</p>
-					<p id="date"><?php $today = getdate(); echo date('l, jS F Y');?></p>
-				</div>
-			</div>
-			<div class="showbar">
-				<div id="sb_info">
-					<p id="stitle"><?php echo $response["result"]["tvshows"][0]["label"];?></p>
-					<p id="sgenre"><?php echo implode(" / ", $response["result"]["tvshows"][0]["genre"]);?></p>
-					<p id="sepno"><?php echo $response["result"]["tvshows"][0]["episode"];?> epsiodes</p>
-				</div>
-			</div>
-		</div>
+		<div class="container"><?php include "remote.php";?></div>
 		<hr>
 		<div class="footer">
 			<p>&copy;26</p>

@@ -25,10 +25,6 @@ html, body{
 	margin-left: 20px;
 }
 
-#menu{
-	float: right;
-	margin-right: 20px;
-}
 
 .sidebar{
 	float:left;
@@ -69,6 +65,7 @@ html, body{
 	float:left;
 	position: relative;
 	width: 75%;
+	height: 800px;
 }
 
 .content img{
@@ -150,3 +147,70 @@ html, body{
 	font-size: 12px;
 	float: right;
 }
+
+
+/*
+	CSS MENU
+*/
+
+#cssmenu{
+	float: right;
+	margin-right: 20px;
+}
+
+#cssmenu ul
+{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	width:auto;
+	position:relative;
+	display:block;
+	height:30px;
+	font-size:12px;
+	font-weight:bold;
+	background:transparent url(../img/nav_bg.png) repeat-x top left;
+	font-family:Arial, Helvetica, sans-serif;
+	border-bottom:1px solid #000000;
+	border-top:1px solid #000000;
+}
+
+#cssmenu li
+{
+	display:block;
+	float:left;
+	margin:0;
+	padding:0;
+}
+	
+#cssmenu li a
+{
+	display:block;
+	float:left;
+	color:#999999;
+	text-decoration:none;
+	font-weight:bold;
+	padding:8px 20px 0 20px;
+}
+	
+#cssmenu li a:hover
+{	
+	color:#FFFFFF;
+	height:22px;
+	background:transparent url(../img/nav_bg.png) 0px -30px no-repeat;		
+}
+	
+
+#cssmenu li.active a
+{
+	display:inline;
+	height:22px;
+	background:transparent url(../img/nav_bg.png) 0px -30px no-repeat;	
+	float:left;
+	margin:0;
+}
+
+/*
+	REMOTE
+*/
+

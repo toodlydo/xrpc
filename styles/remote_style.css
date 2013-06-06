@@ -1,0 +1,155 @@
+#box{
+	margin: 0 auto;
+	width: 320px;
+	height: 550px;
+	border: 1px solid #000;
+	border-radius: 20px;
+	background: #fff;
+	color: #000;
+	padding-top: 20px;
+    box-shadow: inset 2px 1px 20px 3px #ccc;
+}
+#box #bh{
+	width: 163px;
+	margin: 5px auto;
+}
+#box #bh img{
+	height: 80px;
+	margin: 0px;
+	padding: 0px;
+}
+#box #dup, #box #ddown{
+	width: 150px;
+	margin: 0 auto;
+}
+#box #dup img{
+	margin-bottom: -39px;
+}
+#box #up, #box #down{
+	width: 150px;
+}
+#box #lor{
+	width: 219px;
+	height: 150px;
+	margin: 0 auto;
+}
+#box #lor #left{
+	margin-right: -20px;
+}
+#box #lor #select{
+	margin-bottom: 15px;
+	height: 120px;
+}
+#box #lor #right{
+	margin-left: -20px;
+}
+#box #ddown #down{
+	margin-top: -34px;
+}
+#box #lor img{
+	height: 120px;
+	margin: 0;
+	padding: 0;
+}
+#box p{
+	display: inline;
+}
+#box #lor img{
+	height: 150px;
+}
+#box #rpf{
+	height: 120px;
+	width: 265px;
+	margin: 5px auto;
+}
+#box #rpf a{
+	display: inline;
+}
+#box #rpf img{
+	height: 100px;
+}
+#box img:hover{
+	cursor: pointer;
+}
+#box #rpf #fastforward, #box #rpf #rewind {
+	height: 80px;
+	margin-bottom: 10px;
+}
+
+/*
+	KEYBOARD
+*/
+#kbcontainer {  
+    margin: 10px auto;  
+    width: 688px;
+	font: 71%/1.5 Verdana, Sans-Serif;  
+    background: #eee;
+	color: #000;
+	display: none;
+}
+#write {  
+    margin: 0 0 5px;  
+    padding: 5px;  
+    width: 671px;  
+    height: 200px;  
+    font: 1em/1.5 Verdana, Sans-Serif;  
+    background: #fff;  
+    border: 1px solid #f9f9f9;  
+    -moz-border-radius: 5px;  
+    -webkit-border-radius: 5px;  
+}  
+#keyboard {  
+    margin: 0;  
+    padding: 0;  
+    list-style: none;  
+}  
+#keyboard li {  
+	float: left;  
+	margin: 0 5px 5px 0;  
+	width: 40px;  
+	height: 40px;  
+	line-height: 40px;  
+	text-align: center;  
+	background: #fff;  
+	border: 1px solid #f9f9f9;  
+	-moz-border-radius: 5px;  
+	-webkit-border-radius: 5px;  
+}  
+.capslock, .tab, .left-shift {  
+	clear: left;  
+}  
+#keyboard .tab, #keyboard .delete {  
+	width: 70px;  
+}  
+#keyboard .capslock {  
+	width: 80px;  
+}  
+#keyboard .return {  
+	width: 77px;  
+}  
+#keyboard .left-shift {  
+	width: 95px;  
+}  
+#keyboard .right-shift {  
+	width: 109px;  
+}  
+.lastitem {  
+	margin-right: 0;  
+}  
+.uppercase {  
+	text-transform: uppercase;  
+}  
+#keyboard .space {  
+	clear: left;  
+	width: 681px;  
+}  
+.on {  
+	display: none;  
+}  
+#keyboard li:hover {  
+	position: relative;  
+	top: 1px;  
+	left: 1px;  
+	border-color: #e5e5e5;  
+	cursor: pointer;  
+}
