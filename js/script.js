@@ -3,6 +3,7 @@
 */
 var i = 0;
 var showid = 0;
+var rurl=0;
 
 $( document ).ready(function() {
 	/*
@@ -69,13 +70,13 @@ function loadpn(response, pn, x){
 
 	window.showid = obj.result.tvshows[x].tvshowid;
 
-	$("#banner").fadeOut(1000, function(){$("#banner").attr("src",decodeURIComponent((obj.result.tvshows[x].art.banner).split("://")[1]));}).fadeIn(1000);
-	$("#poster").fadeOut(1000, function(){$("#poster").attr("src",decodeURIComponent((obj.result.tvshows[x].art.poster).split("://")[1]));}).fadeIn(1000);
+	$("#banner").fadeOut(500, function(){$("#banner").attr("src", rurl + "image/image://" + encodeURIComponent(decodeURIComponent((obj.result.tvshows[x].art.banner).split("://")[1])).replace(/%/g, "%25"));}).fadeIn(500);
+	$("#poster").fadeOut(500, function(){$("#poster").attr("src", rurl + "image/image://" + encodeURIComponent(decodeURIComponent((obj.result.tvshows[x].art.poster).split("://")[1])).replace(/%/g, "%25"));}).fadeIn(500);
 	$("#details #title").html("<p>" + obj.result.tvshows[x].label + "</p>");
 	$("#year").html("<p>Year: " + obj.result.tvshows[x].year + "</p>");
 	$("#rating").html("<p>Rating: " + obj.result.tvshows[x].rating.toFixed(1) + " </p>\n<div style=\"z-index: 1;\"><img style=\"z-index: 1;\" src=\"img/stars_empty.png\" /></div>\n<div style=\"z-index: 2; width:"+(obj.result.tvshows[x].rating.toFixed(1))*16+"px; overflow:hidden;\"> <img src=\"img/stars_full.png\" /></div>");
 	$("#plot").html("<h3>Plot: </h3><p>" + obj.result.tvshows[x].plot + "</p>");
-	$("#fanart").fadeOut(1000, function(){$("#fanart").attr("src",(decodeURIComponent((obj.result.tvshows[x].art.fanart).split("://")[1])).replace("://","://www."));}).fadeIn(1000);
+	$("#fanart").fadeOut(500, function(){$("#fanart").attr("src",rurl + "image/image://" + encodeURIComponent((decodeURIComponent((obj.result.tvshows[x].art.fanart).split("://")[1])).replace("://","://www.")).replace(/%/g, "%25"));}).fadeIn(500);
 	$("#stitle").html(obj.result.tvshows[x].label);
 	$("#sgenre").html((obj.result.tvshows[x].genre).join(" / "));
 	$("#sepno").html(obj.result.tvshows[x].episode + " epsiodes");

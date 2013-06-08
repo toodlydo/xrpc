@@ -7,8 +7,6 @@ $action = $_GET['action'];
 // Set your return content type
 header('Content-type: application/json');
 
-$rurl = 'http://'.$XBMC_USER.':'.$XBMC_PASS.'@'.$XBMC_IP.':'.$XBMC_PORT.'/';
-
 // Website url to open
 if($action == "home"){
 	$daurl = $rurl.'jsonrpc?request={"jsonrpc":"2.0","method":"Input.Home","id":1}';

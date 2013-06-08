@@ -7,11 +7,14 @@
 	$XBMC_IP = "192.168.0.101";
 	$XBMC_PORT = "81";
 	$url = "";
+	$rurl = "";
 
 	if($XBMC_PASS == ""){
 		$url = "http://" . $XBMC_IP . ":" . $XBMC_PORT . "/jsonrpc";
+		$rurl = 'http://'.$XBMC_IP.':'.$XBMC_PORT.'/';
 	} else{
 		$url = "http://" . $XBMC_USER . ":" . $XBMC_PASS . "@" . $XBMC_IP . ":" . $XBMC_PORT . "/jsonrpc";
+		$rurl = 'http://'.$XBMC_USER.':'.$XBMC_PASS.'@'.$XBMC_IP.':'.$XBMC_PORT.'/';
 	}
 
 	$videoLibraryGetTVShows = '{"jsonrpc": "2.0", "method": "VideoLibrary.GetTVShows", "id": 1, "params":{"properties":["art","genre","plot","title","originaltitle","year","rating","thumbnail","playcount","file","fanart","episode"]}}';

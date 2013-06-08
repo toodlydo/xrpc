@@ -28,7 +28,7 @@
 			//var_dump($rawresponse);
 			$response = json_decode($rawresponse, true);
 			$_SESSION['response'] = $response;
-			echo '<script> var response = \''.str_replace("'","\\'",$rawresponse).'\'; </script>';
+			echo '<script> var response = \''.str_replace("'","\\'",$rawresponse).'\'; rurl ="'.$rurl.'";</script>';
 		?>
 		<hr>
 		<div class="header">
