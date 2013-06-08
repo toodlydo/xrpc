@@ -1,7 +1,7 @@
 /*
 	File: script.js
 */
-var i = 44;
+var i = 0;
 var showid = 0;
 var rurl=0;
 var totaltv=0;
