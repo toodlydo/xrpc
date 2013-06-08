@@ -1,7 +1,9 @@
 <?php
-	session_start();
-	require 'settings.php';
-	$response = $_SESSION["response"];
+	if(session_id() == '') {
+		session_start();
+		$response = $_SESSION["response"];
+	}
+	require_once 'settings.php';
 ?>
 		<div class="sidebar">
 			<img id="banner" src="<?php echo substr(urldecode(explode("://",$response["result"]["tvshows"][0]["art"]["banner"])[1]), 0, -1);?>"/>
@@ -30,6 +32,8 @@
 					<p id="notv"><?php echo count($response["result"]["tvshows"]); ?> TV SHOWS</p>
 					<p id="date"><?php $today = getdate(); echo date('l, jS F Y');?></p>
 				</div>
+			</div>
+			<div id="browse">
 			</div>
 			<div class="showbar">
 				<div id="sb_info">

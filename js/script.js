@@ -2,27 +2,62 @@
 	File: script.js
 */
 var i = 0;
+var showid = 0;
 
 $( document ).ready(function() {
 	/*
 		space for jquery actions if needed
 	*/
-	$('.active').toggleClass("active");
+	//$('.active').toggleClass("active");
 	//$("#mremote").addClass("active");
-	$("#mremote").parent().toggleClass("active");
-	$("#mtv").on('click', function(){
+	//$("#mremote").parent().toggleClass("active");
+	$("#cssmenu").on('click', "#mtv", function(){
 		//alert("mtv");
 		$('.container').load('tvshows.php');
 		$('.active').toggleClass("active");
 		$("#mtv").parent().toggleClass("active");
 	});
-	$("#mremote").on('click', function(){
-		//alert("mtv");
+	$("#cssmenu").on('click', "#mremote", function(){
 		$('.container').load('remote.php');
+		$('.active').toggleClass("active");
+		$("#mremote").parent().toggleClass("active");
 	});
+	$("#cssmenu").on('click', "#msystem", function(){
+		$('.container').load('system.php');
+		$('.active').toggleClass("active");
+		$("#msystem").parent().toggleClass("active");
+	});
+	$("#cssmenu").on('click', "#mstream", function(){
+		$('.container').load('stream.php');
+		$('.active').toggleClass("active");
+		$("#mstream").parent().toggleClass("active");
+	});
+	$(".container").on('click', "#fanart", function(){
+		$("#browse").slideToggle("slow");
+		$("#browse").scrollTop(0);
+		$('#browse').load('browse.php?id='+window.showid+'&action=seasons');
+	});
+	$(".container").on('click',".season", function(){
+		$("#browse").scrollTop(0);
+		$('#browse').load('browse.php?id='+window.showid+'&action=episodes&season='+$(this).attr("id"));
+	});
+	$(".container").on('click',".episode", function(){
+		$("#browse").scrollTop(0);
+		$('#browse').load('browse.php?id='+window.showid+'&action=epdetails&episode='+$(this).attr("id"));
+	});
+	$(".container").on('click',"#up", function(){
+		if($(".season")[0]==null && $(".episode")[0]!=null){
+			$('#browse').load('browse.php?id='+window.showid+'&action=seasons');
+		} else if($(".epd")[0]!=null){
+			$('#browse').load('browse.php?id='+window.showid+'&action=episodes&season='+$(this).attr("class"));
+		} else { //if($(".season")[0]!=null)
+			$("#browse").slideToggle("slow");
+		}
+	});	
 });
 
 function loadpn(response, pn, x){
+	$("#browse").hide();
 	if(pn==0){
 		window.i = x - 1;
 	} else{
@@ -30,6 +65,8 @@ function loadpn(response, pn, x){
 	}
 	// Replace all bad chars. Could be more efficient.
 	var obj = $.parseJSON((response.replace(/\\\",/g, "\",")).replace(/\r\n/g,"").replace(/\/\"/g, "\"").replace(/\\/g, "\\\\").replace(/ \"/g, " \\\"").replace(/\" /g, "\\\" ").replace(/. \\\",/g, ".\",").replace(/\", /g, "\\\", ").replace(/\(\"/g, "\(\\\", ").replace(/\"\)/g, "\\\"\)").replace(/\.\"\"/g, "\.\\\"\""));
+
+	window.showid = obj.result.tvshows[x].tvshowid;
 
 	$("#banner").fadeOut(1000, function(){$("#banner").attr("src",decodeURIComponent((obj.result.tvshows[x].art.banner).split("://")[1]));}).fadeIn(1000);
 	$("#poster").fadeOut(1000, function(){$("#poster").attr("src",decodeURIComponent((obj.result.tvshows[x].art.poster).split("://")[1]));}).fadeIn(1000);

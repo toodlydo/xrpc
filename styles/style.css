@@ -60,6 +60,9 @@ html, body{
 .sidebar #title{
 	font-size: 18pt;
 }
+.sidebar #prev, .sidebar #next {
+	cursor: pointer;
+}
 
 .content{
 	float:left;

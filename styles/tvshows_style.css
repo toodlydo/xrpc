@@ -1,0 +1,77 @@
+#fanart:hover{
+	cursor: pointer;
+}
+#browse {
+	display: none;
+    position: absolute;
+    top: 15%;
+    border: 1px solid #000;
+	border-radius: 20px;
+    background: #000;
+	opacity:0.7;
+    width: 80%;
+    margin: 0 auto;
+    height: 60%;
+    left: 10%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+#browse  table a{
+	text-decoration: none;
+	color: #000;
+}
+#browse ul {
+    text-decoration: none;
+    list-style: none outside none;
+	font-size: 24pt;
+	margin: 0;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+#browse ul li {
+	margin-left: -40px;
+	padding-left: 30px; 
+	padding-top: 10px;
+	padding-bottom: 10px;
+	height: 30pt;
+}
+#browse ul li #ll {
+	float: left;
+	display: inline-block;
+	margin: 0;
+}
+#browse ul li #lr {
+	float: right;
+	display: inline-block;
+	margin: 0;
+}
+#browse ul li:hover {
+	cursor: pointer;
+	/*background: linear-gradient(to bottom, rgba(33,53,91,0.65) 0%,rgba(0,0,0,0) 100%);*/
+	background: #305EC9;
+	background: linear-gradient(to bottom, rgba(41,137,216,1) 0%,rgba(17,58,91,0.29) 29%,rgba(0,0,0,0) 50%,rgba(16,55,86,0.29) 70%,rgba(41,137,216,1) 100%);
+	background: linear-gradient(to bottom, rgba(31,107,165,1) 0%,rgba(13,45,69,0.29) 29%,rgba(0,0,0,0) 50%,rgba(12,43,66,0.29) 70%,rgba(31,107,165,1) 100%);
+}
+#browse table {
+	font-family: 'BenchNine', sans-serif, 400;
+	font-size: 20pt;
+	border-collapse: collapse;
+	margin: 20px;
+}
+#browse table td{
+	border:1px solid rgba(28, 190, 255, .5);
+	margin: 0;
+	padding: 5px;
+}
+#browse #up:hover {
+	cursor: pointer;
+}
+#browse #eptitle{
+	font-size: 24pt;
+	text-transform: uppercase;
+}
+#browse #eptitle span{
+	font-size: 18pt;
+	font-color: #ccc;
+	text-transform: none;
+}
