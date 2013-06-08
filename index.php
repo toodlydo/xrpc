@@ -52,5 +52,8 @@
 			<p>&copy;26</p>
 			<div id="output"></div>
 		</div>
+		<div class="remote">
+			<?php include "remote.php";?>
+		</div>
 	<body>
 </html>

@@ -18,9 +18,10 @@ $( document ).ready(function() {
 		$("#mtv").parent().toggleClass("active");
 	});
 	$("#cssmenu").on('click', "#mremote", function(){
-		$('.container').load('remote.php');
-		$('.active').toggleClass("active");
-		$("#mremote").parent().toggleClass("active");
+		//$('.container').load('remote.php');
+		//$('.active').toggleClass("active");
+		//$("#mremote").parent().toggleClass("active");
+		$('.remote').animate({left:Math.abs($('.remote').css("left").split("px")[0])-320}, 700);
 	});
 	$("#cssmenu").on('click', "#msystem", function(){
 		$('.container').load('system.php');

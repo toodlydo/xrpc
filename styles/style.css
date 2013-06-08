@@ -217,3 +217,9 @@ html, body{
 	REMOTE
 */
 
+.remote{
+	position: absolute;
+	left: -320px;
+	top: 10%;
+	z-index: 99;
+}

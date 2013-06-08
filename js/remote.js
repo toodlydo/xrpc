@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-	$(".container").on('click', ".lruds", function(){
+	$(".remote").on('click', ".lruds", function(){
 		$.getJSON('inputExecuteAction.php?action='+$(this).attr("id")
 		).done(function(data) {
 			console.log( "success" );
@@ -10,7 +10,7 @@ $( document ).ready(function() {
 	});
 
 	var cid = "";
-	$(".container").on('click', ".playeraction", function(){
+	$(".remote").on('click', ".playeraction", function(){
 		cid = $(this);
 		$.getJSON('inputExecuteAction.php?id=1&action='+cid.attr("id")
 		).done(function(data) {
