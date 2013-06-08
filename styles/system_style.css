@@ -1,0 +1,52 @@
+/*#leftsystem {
+	float:left;
+	width: 25%;
+	display: inline-block;
+}
+
+#rightsystem {
+	float:right;
+	width: 74.5%;
+	display: inline-block;
+}
+
+#leftsystem, #rightsystem {
+	background: #fff;
+	color: #000;
+	border: 1px solid #333;
+	height: 800px;
+	margin: 0;
+	padding: 0;
+}*/
+
+#system{
+	background: rgba(0,0,0, 0.5);
+	color: #fff;
+}
+
+#system table{
+	border-collapse:collapse;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 800px;
+	font-size: 24pt;
+}
+#system table ul {
+	padding: 0;
+	margin: 0;
+}
+
+#system table ul  li{
+	text-decoration: none;
+    list-style: none outside none;
+	padding: 10px;
+}
+
+#system table ul  li:hover{
+	cursor: pointer;
+}
+
+#system td{
+	border: 1px solid #333;
+}

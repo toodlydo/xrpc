@@ -1,9 +1,10 @@
 /*
 	File: script.js
 */
-var i = 0;
+var i = 44;
 var showid = 0;
 var rurl=0;
+var totaltv=0;
 
 $( document ).ready(function() {
 	/*
@@ -62,22 +63,47 @@ function loadpn(response, pn, x){
 	$("#browse").hide();
 	if(pn==0){
 		window.i = x - 1;
+		if(i==-1){
+			window.i=0;
+		}
 	} else{
 		window.i = x + 1;
+		if(i >= totaltv - 1){
+			window.i = totaltv - 1;
+		}
 	}
-	// Replace all bad chars. Could be more efficient.
-	var obj = $.parseJSON((response.replace(/\\\",/g, "\",")).replace(/\r\n/g,"").replace(/\/\"/g, "\"").replace(/\\/g, "\\\\").replace(/ \"/g, " \\\"").replace(/\" /g, "\\\" ").replace(/. \\\",/g, ".\",").replace(/\", /g, "\\\", ").replace(/\(\"/g, "\(\\\", ").replace(/\"\)/g, "\\\"\)").replace(/\.\"\"/g, "\.\\\"\""));
+	console.log(x + ' -- '+ i);
+	if(i < totaltv) {
+		// Replace all bad chars. Could be more efficient.
+		var obj = $.parseJSON((response.replace(/\\\",/g, "\",")).replace(/\r\n/g,"").replace(/\/\"/g, "\"").replace(/\\/g, "\\\\").replace(/ \"/g, " \\\"").replace(/\" /g, "\\\" ").replace(/. \\\",/g, ".\",").replace(/\", /g, "\\\", ").replace(/\(\"/g, "\(\\\", ").replace(/\"\)/g, "\\\"\)").replace(/\.\"\"/g, "\.\\\"\""));
 
-	window.showid = obj.result.tvshows[x].tvshowid;
-
-	$("#banner").fadeOut(500, function(){$("#banner").attr("src", rurl + "image/image://" + encodeURIComponent(decodeURIComponent((obj.result.tvshows[x].art.banner).split("://")[1])).replace(/%/g, "%25"));}).fadeIn(500);
-	$("#poster").fadeOut(500, function(){$("#poster").attr("src", rurl + "image/image://" + encodeURIComponent(decodeURIComponent((obj.result.tvshows[x].art.poster).split("://")[1])).replace(/%/g, "%25"));}).fadeIn(500);
-	$("#details #title").html("<p>" + obj.result.tvshows[x].label + "</p>");
-	$("#year").html("<p>Year: " + obj.result.tvshows[x].year + "</p>");
-	$("#rating").html("<p>Rating: " + obj.result.tvshows[x].rating.toFixed(1) + " </p>\n<div style=\"z-index: 1;\"><img style=\"z-index: 1;\" src=\"img/stars_empty.png\" /></div>\n<div style=\"z-index: 2; width:"+(obj.result.tvshows[x].rating.toFixed(1))*16+"px; overflow:hidden;\"> <img src=\"img/stars_full.png\" /></div>");
-	$("#plot").html("<h3>Plot: </h3><p>" + obj.result.tvshows[x].plot + "</p>");
-	$("#fanart").fadeOut(500, function(){$("#fanart").attr("src",rurl + "image/image://" + encodeURIComponent((decodeURIComponent((obj.result.tvshows[x].art.fanart).split("://")[1])).replace("://","://www.")).replace(/%/g, "%25"));}).fadeIn(500);
-	$("#stitle").html(obj.result.tvshows[x].label);
-	$("#sgenre").html((obj.result.tvshows[x].genre).join(" / "));
-	$("#sepno").html(obj.result.tvshows[x].episode + " epsiodes");
+		window.showid = obj.result.tvshows[i].tvshowid;
+		
+		//check whether there is any art before displaying them
+		count = 0;
+		for (var a in obj.result.tvshows[i].art) {
+			if (obj.result.tvshows[i].art.hasOwnProperty(a)) {
+				count++;
+			}
+		}
+		console.log(count);
+		if(count != 0){
+			$("#banner").fadeOut(500, function(){$("#banner").attr("src", rurl + "image/image://" + encodeURIComponent(decodeURIComponent((obj.result.tvshows[i].art.banner).split("://")[1])).replace(/%/g, "%25"));}).fadeIn(500);
+			$("#poster").fadeOut(500, function(){$("#poster").attr("src", rurl + "image/image://" + encodeURIComponent(decodeURIComponent((obj.result.tvshows[i].art.poster).split("://")[1])).replace(/%/g, "%25"));}).fadeIn(500);
+			$("#fanart").fadeOut(500, function(){$("#fanart").attr("src", rurl + "image/image://" + encodeURIComponent((decodeURIComponent((obj.result.tvshows[i].art.fanart).split("://")[1])).replace("://","://www.")).replace(/%/g, "%25"));}).fadeIn(500);
+		} else {
+			console.log("no image")
+			$("#banner").attr("src","img/noimage.png");
+			$("#poster").attr("src","img/noimage.png");
+			$("#fanart").attr("src","img/noimage.png");
+		}
+		$("#details #title").html("<p>" + obj.result.tvshows[i].label + "</p>");
+		$("#year").html("<p>Year: " + obj.result.tvshows[i].year + "</p>");
+		$("#rating").html("<p>Rating: " + obj.result.tvshows[i].rating.toFixed(1) + " </p>\n<div style=\"z-index: 1;\"><img style=\"z-index: 1;\" src=\"img/stars_empty.png\" /></div>\n<div style=\"z-index: 2; width:"+(obj.result.tvshows[x].rating.toFixed(1))*16+"px; overflow:hidden;\"> <img src=\"img/stars_full.png\" /></div>");
+		$("#plot").html("<h3>Plot: </h3><p>" + obj.result.tvshows[i].plot + "</p>");
+		$("#notv").html((i+1) + " /" + $("#notv").html().split("/")[1]);
+		$("#stitle").html(obj.result.tvshows[i].label);
+		$("#sgenre").html((obj.result.tvshows[i].genre).join(" / "));
+		$("#sepno").html(obj.result.tvshows[i].episode + " epsiodes");
+	}
 }

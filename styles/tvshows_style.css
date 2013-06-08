@@ -14,7 +14,7 @@
     height: 60%;
     left: 10%;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 #browse  table a{
 	text-decoration: none;

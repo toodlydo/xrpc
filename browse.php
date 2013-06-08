@@ -31,12 +31,18 @@
 			}
 		}
 	} else if($action == "episodes"){
-		$request = '{"jsonrpc":"2.0","method":"VideoLibrary.GetEpisodes","id":1,"params":{"tvshowid":'.$showid.',"season":'.$seasonnum.', "properties":["episode","showtitle"]}}';
+		$request = '{"jsonrpc":"2.0","method":"VideoLibrary.GetEpisodes","id":1,"params":{"tvshowid":'.$showid.',"season":'.$seasonnum.', "properties":["episode","showtitle","firstaired","season"]}}';
 		$epresponse = getjsonrpc($request, $url);
 		$response = json_decode($epresponse, true);
 		$episodes = ($response["result"]["episodes"]);
 		foreach($episodes as $episode){
-			echo '<li class="episode" id="'.$episode["episodeid"].'"><p id="ll">'.$episode["label"].'</p></li>';
+			echo '<li class="episode" id="'.$episode["episodeid"].'"><p id="ll">'.
+				'<table style="border-collapsed: collpased; margin: 0px; padding: 0px; width: 100%;"><tr>'.
+				'<td style="border: none !important; width: 10%;">'."S".($episode["season"]<10?'0'.$episode["season"]:$episode["season"])."E".($episode["episode"]<10?'0'.$episode["episode"]:$episode["episode"]).'</td>'.
+				'<td style="border: none !important; width: 80%; text-align: left;">'.explode(".",$episode["label"],2)[1].'</td>'.
+				'<td style="border: none !important; width: 10%;">'.$episode["firstaired"].'</td>'.
+				'</tr></table>'.
+				'</p></li>';
 		}
 	} else if($action == "epdetails"){
 		$request = '{"jsonrpc":"2.0","method":"VideoLibrary.GetEpisodeDetails","id":1,"params":{"episodeid":'.$epnum.',"properties":["tvshowid","rating","showtitle","runtime","plot","cast","writer","director","streamdetails","firstaired","title","thumbnail","season","episode","file","productioncode"]}}';

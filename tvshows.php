@@ -29,7 +29,7 @@
 			<img id="fanart" src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$response["result"]["tvshows"][0]["art"]["fanart"])[1]), 0, -1)));?>"/>
 			<div class="infobar">
 				<div id="ib_info">
-					<p id="notv"><?php echo count($response["result"]["tvshows"]); ?> TV SHOWS</p>
+					<p id="notv">1 / <?php echo count($response["result"]["tvshows"]); ?> TV SHOWS</p>
 					<p id="date"><?php $today = getdate(); echo date('l, jS F Y');?></p>
 				</div>
 			</div>

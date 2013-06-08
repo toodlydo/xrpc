@@ -14,6 +14,7 @@
 		<link type="text/css" rel="stylesheet" href="styles/style.css" />
 		<link type="text/css" rel="stylesheet" href="styles/tvshows_style.css" />
 		<link type="text/css" rel="stylesheet" href="styles/remote_style.css" />
+		<link type="text/css" rel="stylesheet" href="styles/system_style.css" />
 		<link rel="stylesheet" type="text/css" href="flowplayer/skin/playful.css">
 		<link rel="shortcut icon" href="icon/favicon.ico" type="image/x-icon" />
 		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
@@ -28,7 +29,7 @@
 			//var_dump($rawresponse);
 			$response = json_decode($rawresponse, true);
 			$_SESSION['response'] = $response;
-			echo '<script> var response = \''.str_replace("'","\\'",$rawresponse).'\'; rurl ="'.$rurl.'";</script>';
+			echo '<script> var response = \''.str_replace("'","\\'",$rawresponse).'\'; rurl ="'.$rurl.'"; totaltv='.count($response["result"]["tvshows"]).';</script>';
 		?>
 		<hr>
 		<div class="header">
