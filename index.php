@@ -24,13 +24,6 @@
 	</head>
 
 	<body>
-		<?php
-			$rawresponse = getjsonrpc($request, $url);
-			//var_dump($rawresponse);
-			$response = json_decode($rawresponse, true);
-			$_SESSION['response'] = $response;
-			echo '<script> var response = \''.str_replace("'","\\'",$rawresponse).'\'; rurl ="'.$rurl.'"; totaltv='.count($response["result"]["tvshows"]).';</script>';
-		?>
 		<hr>
 		<div class="header">
 			<p id="title">XBMC Database Explorer</p><span>Beta</span>
@@ -47,7 +40,7 @@
 			</div>
 		</div>
 		<hr>
-		<div class="container"><?php include "tvshows.php";?></div>
+		<div class="container"></div>
 		<hr>
 		<div class="footer">
 			<p>&copy;26</p>

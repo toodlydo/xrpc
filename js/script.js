@@ -4,7 +4,7 @@
 var i = 0;
 var showid = 0;
 var rurl=0;
-var totaltv=0;
+var totalv=0;
 
 $( document ).ready(function() {
 	/*
@@ -14,10 +14,14 @@ $( document ).ready(function() {
 	//$("#mremote").addClass("active");
 	//$("#mremote").parent().toggleClass("active");
 	$("#cssmenu").on('click', "#mtv", function(){
-		//alert("mtv");
 		$('.container').load('tvshows.php');
 		$('.active').toggleClass("active");
 		$("#mtv").parent().toggleClass("active");
+	});
+	$("#cssmenu").on('click', "#mmovie", function(){
+		$('.container').load('movies.php');
+		$('.active').toggleClass("active");
+		$("#mmovie").parent().toggleClass("active");
 	});
 	$("#cssmenu").on('click', "#mremote", function(){
 		//$('.container').load('remote.php');
@@ -36,9 +40,15 @@ $( document ).ready(function() {
 		$("#mstream").parent().toggleClass("active");
 	});
 	$(".container").on('click', "#fanart", function(){
-		$("#browse").slideToggle("slow");
-		$("#browse").scrollTop(0);
-		$('#browse').load('browse.php?id='+window.showid+'&action=seasons');
+		if($("#fanart").attr("class")=="ftvshow"){
+			$("#browse").slideToggle("slow");
+			$("#browse").scrollTop(0);
+			$('#browse').load('browse.php?id='+window.showid+'&action=seasons');
+		} else if($("#fanart").attr("class")=="fmovie"){
+			$("#browse").slideToggle("slow");
+			$("#browse").scrollTop(0);
+			$('#browse').load('browse.php?id='+window.showid+'&action=movie');
+		}
 	});
 	$(".container").on('click',".season", function(){
 		$("#browse").scrollTop(0);
@@ -60,6 +70,7 @@ $( document ).ready(function() {
 });
 
 function loadpn(response, pn, x){
+	var v = "t";
 	$("#browse").hide();
 	if(pn==0){
 		window.i = x - 1;
@@ -68,42 +79,56 @@ function loadpn(response, pn, x){
 		}
 	} else{
 		window.i = x + 1;
-		if(i >= totaltv - 1){
-			window.i = totaltv - 1;
+		if(i >= totalv - 1){
+			window.i = totalv - 1;
 		}
 	}
 	console.log(x + ' -- '+ i);
-	if(i < totaltv) {
+	if(i < totalv) {
 		// Replace all bad chars. Could be more efficient.
 		var obj = $.parseJSON((response.replace(/\\\",/g, "\",")).replace(/\r\n/g,"").replace(/\/\"/g, "\"").replace(/\\/g, "\\\\").replace(/ \"/g, " \\\"").replace(/\" /g, "\\\" ").replace(/. \\\",/g, ".\",").replace(/\", /g, "\\\", ").replace(/\(\"/g, "\(\\\", ").replace(/\"\)/g, "\\\"\)").replace(/\.\"\"/g, "\.\\\"\""));
+		var video = "";
+		if(obj.result.tvshows!=null) {
+			v = "t";
+			video = obj.result.tvshows;
+			window.showid = video[i].tvshowid;
+			$("#fanart").attr("class", "ftvshow");
+		} else{
+			v = "m";
+			video = obj.result.movies;
+			window.showid = video[i].movieid;
+			$("#fanart").attr("class", "fmovie");
+		}
 
-		window.showid = obj.result.tvshows[i].tvshowid;
-		
 		//check whether there is any art before displaying them
 		count = 0;
-		for (var a in obj.result.tvshows[i].art) {
-			if (obj.result.tvshows[i].art.hasOwnProperty(a)) {
+		for (var a in video[i].art) {
+			if (video[i].art.hasOwnProperty(a)) {
 				count++;
 			}
 		}
 		console.log(count);
 		if(count != 0){
-			$("#banner").fadeOut(500, function(){$("#banner").attr("src", rurl + "image/image://" + encodeURIComponent(decodeURIComponent((obj.result.tvshows[i].art.banner).split("://")[1])).replace(/%/g, "%25"));}).fadeIn(500);
-			$("#poster").fadeOut(500, function(){$("#poster").attr("src", rurl + "image/image://" + encodeURIComponent(decodeURIComponent((obj.result.tvshows[i].art.poster).split("://")[1])).replace(/%/g, "%25"));}).fadeIn(500);
-			$("#fanart").fadeOut(500, function(){$("#fanart").attr("src", rurl + "image/image://" + encodeURIComponent((decodeURIComponent((obj.result.tvshows[i].art.fanart).split("://")[1])).replace("://","://www.")).replace(/%/g, "%25"));}).fadeIn(500);
+			if (v == "t"){
+				$("#banner").fadeOut(500, function(){$("#banner").attr("src", rurl + "image/image://" + encodeURIComponent(decodeURIComponent((video[i].art.banner).split("://")[1])).replace(/%/g, "%25"));}).fadeIn(500);
+			}
+			$("#poster").fadeOut(500, function(){$("#poster").attr("src", rurl + "image/image://" + encodeURIComponent(decodeURIComponent((video[i].art.poster).split("://")[1])).replace(/%/g, "%25"));}).fadeIn(500);
+			$("#fanart").fadeOut(500, function(){$("#fanart").attr("src", rurl + "image/image://" + encodeURIComponent((decodeURIComponent((video[i].art.fanart).split("://")[1])).replace("://","://www.")).replace(/%/g, "%25").replace(/www./g,""));}).fadeIn(500);
 		} else {
 			console.log("no image")
-			$("#banner").attr("src","img/noimage.png");
+			if (v == "t"){
+				$("#banner").attr("src","img/noimage.png");
+			}
 			$("#poster").attr("src","img/noimage.png");
 			$("#fanart").attr("src","img/noimage.png");
 		}
-		$("#details #title").html("<p>" + obj.result.tvshows[i].label + "</p>");
-		$("#year").html("<p>Year: " + obj.result.tvshows[i].year + "</p>");
-		$("#rating").html("<p>Rating: " + obj.result.tvshows[i].rating.toFixed(1) + " </p>\n<div style=\"z-index: 1;\"><img style=\"z-index: 1;\" src=\"img/stars_empty.png\" /></div>\n<div style=\"z-index: 2; width:"+(obj.result.tvshows[x].rating.toFixed(1))*16+"px; overflow:hidden;\"> <img src=\"img/stars_full.png\" /></div>");
-		$("#plot").html("<h3>Plot: </h3><p>" + obj.result.tvshows[i].plot + "</p>");
+		$("#details #title").html("<p>" + video[i].label + "</p>");
+		$("#year").html("<p>Year: " + video[i].year + "</p>");
+		$("#rating").html("<p>Rating: " + video[i].rating.toFixed(1) + " </p>\n<div style=\"z-index: 1;\"><img style=\"z-index: 1;\" src=\"img/stars_empty.png\" /></div>\n<div style=\"z-index: 2; width:"+(video[i].rating.toFixed(1))*16+"px; overflow:hidden;\"> <img src=\"img/stars_full.png\" /></div>");
+		$("#plot").html("<h3>Plot: </h3><p>" + video[i].plot + "</p>");
 		$("#notv").html((i+1) + " /" + $("#notv").html().split("/")[1]);
-		$("#stitle").html(obj.result.tvshows[i].label);
-		$("#sgenre").html((obj.result.tvshows[i].genre).join(" / "));
-		$("#sepno").html(obj.result.tvshows[i].episode + " epsiodes");
+		$("#stitle").html(video[i].label);
+		$("#sgenre").html((video[i].genre).join(" / "));
+		$("#sepno").html(video[i].episode + " epsiodes");
 	}
 }

@@ -74,7 +74,7 @@
 			<tr>
 					<td valign="top">Cast</td>
 					<td colspan="2">
-						<div style="height:150px; overflow-y:scroll;">
+						<div style="height:150px; overflow-y:auto;">
 							<?php $names = array_map(function($item) { return $item["name"].($item["role"]==""?"":" as ".$item["role"]); }, $episode["cast"]); echo implode("<br>",$names);?>
 						</div>
 					</td>
@@ -92,6 +92,57 @@
 			</tr>
 			<tr>
 				<td colspan="3">Plot<br><?php echo $episode["plot"];?></td>
+			</tr>
+		</table>
+<?php
+	} else if($action == "movie"){
+		$request = '{"jsonrpc": "2.0", "method": "VideoLibrary.GetMovieDetails","id":1,"params":{"movieid":'.$showid.',"properties":["rating","runtime","plot","cast","writer","director","streamdetails","year","title","thumbnail","file","tagline","votes","mpaa","genre"]}}';
+		$mdresponse = getjsonrpc($request, $url);
+		$response = json_decode($mdresponse, true);
+		$movie = ($response["result"]["moviedetails"]);
+?>
+		<table class="md" id="<?php echo $movie["episodeid"];?>">
+			<tr>
+				<td style="border: none;" colspan="3" id="up" class="<?php echo $movie["season"];?>">..</td>
+			</tr>
+			<tr>
+				<td colspan="3" id="eptitle"><?php echo $movie["title"];?><br>
+					<span><?php echo $movie["tagline"];?></span>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: center;"><?php if($movie["mpaa"]=="Rated "){echo "Not Rated";} else{ echo $movie["mpaa"];}?></td><td>Year: <?php echo $movie["year"];?></td><td><?php echo implode($movie["genre"]," / ");?></td>
+			</tr>
+			<tr>
+				<td>Director</td><td colspan="2"><?php echo join(" / ",$movie["director"]);?></td>
+			</tr>
+			<tr>
+				<td>Writer</td><td colspan="2"><?php echo implode(" / ",$movie["writer"]);?></td>
+			</tr>
+			<tr>
+				<td>Runtime: </td><td><?php echo round($movie["runtime"]/60,0);?> Minutes</td><td>Rating: <?php echo round($movie["rating"],1).' ('.$movie["votes"].' votes)';?></td>
+			</tr>
+			<tr>
+					<td valign="top">Cast</td>
+					<td colspan="2">
+						<div style="height:150px; overflow-y:auto;">
+							<?php $names = array_map(function($item) { return $item["name"].($item["role"]==""?"":" as ".$item["role"]); }, $movie["cast"]); echo implode("<br>",$names);?>
+						</div>
+					</td>
+			</tr>
+			<tr>
+				<?php 
+					if($XBMC_PASS == ""){
+						$_SESSION["file"] = "http://".$XBMC_IP.":".$XBMC_PORT."/vfs/".$movie["file"];
+					} else{
+						$_SESSION["file"] = "http://" . $XBMC_USER . ":" . $XBMC_PASS . "@" . $XBMC_IP . ":" . $XBMC_PORT."/vfs/".str_replace("\\","\\\\",$movie["file"]);
+					}
+					$_SESSION["epid"]=$movie["movieid"];
+				?>
+				<td colspan="3" style="text-align: center; background: #8CCBFF;"><a href="stream.php" target="_blank">Play / Download</a></td>
+			</tr>
+			<tr>
+				<td colspan="3">Plot<br><?php echo $movie["plot"];?></td>
 			</tr>
 		</table>
 <?php
