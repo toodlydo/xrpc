@@ -1,7 +1,7 @@
 #fanart:hover{
 	cursor: pointer;
 }
-#browse {
+#browse, #edit {
 	display: none;
     position: absolute;
     top: 15%;
@@ -52,13 +52,14 @@
 	background: linear-gradient(to bottom, rgba(41,137,216,1) 0%,rgba(17,58,91,0.29) 29%,rgba(0,0,0,0) 50%,rgba(16,55,86,0.29) 70%,rgba(41,137,216,1) 100%);
 	background: linear-gradient(to bottom, rgba(31,107,165,1) 0%,rgba(13,45,69,0.29) 29%,rgba(0,0,0,0) 50%,rgba(12,43,66,0.29) 70%,rgba(31,107,165,1) 100%);
 }
-#browse table {
+#browse table, #edit table, .vedit  {
 	font-family: 'BenchNine', sans-serif, 400;
 	font-size: 20pt;
 	border-collapse: collapse;
-	margin: 20px;
+	margin: 20px auto;
+	width: 95%;
 }
-#browse table td{
+#browse table td, .vedit  td{
 	border:1px solid rgba(28, 190, 255, .5);
 	margin: 0;
 	padding: 5px;
@@ -74,4 +75,21 @@
 	font-size: 18pt;
 	font-color: #ccc;
 	text-transform: none;
+}
+
+#browse #vedit:hover, #browse #vrefresh:hover, #edit #up:hover {
+	cursor: pointer;
+}
+
+#edit{
+	opacity:0.9;
+}
+
+.vedit td p{
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+.vedit td input{
+	display: inline;
 }

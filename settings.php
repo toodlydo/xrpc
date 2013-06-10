@@ -39,6 +39,7 @@
 	$inputSendText = '{"jsonrpc": "2.0", "id": 1, "method": "Input.SendText", "params":{"text":"Movies"}}'; // sends text and return command
 	$inputShowCodec = '{"jsonrpc": "2.0", "id": 1, "method": "Input.ShowCodec", "params":{}}'; // shows codec overlay
 	$xbmcGetInfoLabels = '{"jsonrpc": "2.0", "id": 1, "method": "XBMC.GetInfoLabels", "params":{"labels":["System.TotalSpace"]}}'; // labels can be found here: http://wiki.xbmc.org/index.php?title=InfoLabels
+	$videoLibraryExport = '{"jsonrpc": "2.0", "id":1,"method": "VideoLibrary.Export","params":{"options":{"path":"C:\\"}}}';
 	
 	$request = $videoLibraryGetTVShows;
 	

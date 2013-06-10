@@ -8,7 +8,7 @@
 	isset($_GET['episode'])? $epnum = $_GET['episode']:$epnum=-1;
 	isset($_GET['action'])? $action = $_GET['action']:$action="seasons";
 
-	if($epnum == -1){
+	if($epnum == -1 && ($action == "seasons" || $action == "episodes")){
 ?>
 				<ul>
 					<li id="up">..</a></li>
@@ -39,7 +39,7 @@
 			echo '<li class="episode" id="'.$episode["episodeid"].'"><p id="ll">'.
 				'<table style="border-collapsed: collpased; margin: 0px; padding: 0px; width: 100%;"><tr>'.
 				'<td style="border: none !important; width: 10%;">'."S".($episode["season"]<10?'0'.$episode["season"]:$episode["season"])."E".($episode["episode"]<10?'0'.$episode["episode"]:$episode["episode"]).'</td>'.
-				'<td style="border: none !important; width: 80%; text-align: left;">'.explode(".",$episode["label"],2)[1].'</td>'.
+				'<td style="border: none !important; width: 75%; text-align: left;">'.explode(".",$episode["label"],2)[1].'</td>'.
 				'<td style="border: none !important; width: 10%;">'.$episode["firstaired"].'</td>'.
 				'</tr></table>'.
 				'</p></li>';
@@ -100,10 +100,11 @@
 		$mdresponse = getjsonrpc($request, $url);
 		$response = json_decode($mdresponse, true);
 		$movie = ($response["result"]["moviedetails"]);
+		$_SESSION["movie"] = $movie;
 ?>
-		<table class="md" id="<?php echo $movie["episodeid"];?>">
+		<table class="md" id="<?php echo $movie["movieid"];?>">
 			<tr>
-				<td style="border: none;" colspan="3" id="up" class="<?php echo $movie["season"];?>">..</td>
+				<td style="border: none;" colspan="3" id="up" class="<?php echo $movie["movieid"];?>">..</td>
 			</tr>
 			<tr>
 				<td colspan="3" id="eptitle"><?php echo $movie["title"];?><br>
@@ -139,7 +140,9 @@
 					}
 					$_SESSION["epid"]=$movie["movieid"];
 				?>
-				<td colspan="3" style="text-align: center; background: #8CCBFF;"><a href="stream.php" target="_blank">Play / Download</a></td>
+				<td style="text-align: center; background: #8CCBFF;"><a href="stream.php" target="_blank">Play / Download</a></td>
+				<td><p id="vedit" style="text-align: center; margin:0; padding: 0; text-decoration: none;">Edit</p></td>
+				<td><p id="vrefresh" style="text-align: center; margin:0; padding: 0; text-decoration: none;">Refresh</p></td>
 			</tr>
 			<tr>
 				<td colspan="3">Plot<br><?php echo $movie["plot"];?></td>
