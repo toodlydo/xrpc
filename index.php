@@ -4,7 +4,7 @@
 */
 	session_start();
 	require_once 'settings.php';
-	GLOBAL $response, $file, $epid, $movie;
+	GLOBAL $response, $file, $epid, $media;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>

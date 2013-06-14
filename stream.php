@@ -22,13 +22,13 @@
 		<div id="videocontainer" style="position: relative;">
 			<a href="<?php echo $file;?>" target="_blank" style="text-decoration: none; color: #000; padding: 10px; background: #ccc; border-radius: 5px; display: block; text-align: center; width: 150px; margin: 0 auto; margin-bottom: 10px;">Download</a>
 			<a href="stream.php?epid=<?php echo $epid;?>" target="_blank" style="text-decoration: none; color: #000; padding: 10px; background: #ccc; border-radius: 5px; display: block; text-align: center; width: 150px; margin: 0 auto; margin-bottom: 10px;">Play in XBMC</a>
-			<div class="flowplayer" data-swf="flowplayer/flowplayer.swf" data-ratio="0.5625" style="left: 10%; width: 80%; margin: 0 auto;" class="flowplayer no-toggle" data-embed="false">
+			<?php //http://www.videolan.org/doc/vlc-user-guide/en/ch07.html ?>
+			<embed type="application/x-vlc-plugin" name="videoplayer" autoplay="no" loop="no" width="400" height="300" target="<?php echo $file; ?>" />
+			<!--<div class="flowplayer" data-swf="flowplayer/flowplayer.swf" data-ratio="0.5625" style="left: 10%; width: 80%; margin: 0 auto;" class="flowplayer no-toggle" data-embed="false">
 				<video>
 					<source type="video/mp4" src="<?php echo $file;?>">
-					<?php //http://www.videolan.org/doc/vlc-user-guide/en/ch07.html ?>
-					<embed type="application/x-vlc-plugin" name="videoplayer" autoplay="no" loop="no" width="400" height="300" target="<?php echo $file; ?>" />
 				</video>
-			</div>
+			</div>-->
 		</div>
 	</body>
 </html>

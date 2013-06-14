@@ -71,7 +71,7 @@ $(document).ready(function () {
         }
     });
     $(".container").on('click', "#vedit", function () {
-        $('#edit').load("edit.php");
+        $('#edit').load("edit.php?id="+showid);
         $('#edit').slideToggle("slow");
     });
     $('.container').on('click', '.editcheck', function () {

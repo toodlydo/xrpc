@@ -7,7 +7,7 @@
 	isset($_GET['season'])? $seasonnum = $_GET['season']:$seasonnum=0;
 	isset($_GET['episode'])? $epnum = $_GET['episode']:$epnum=-1;
 	isset($_GET['action'])? $action = $_GET['action']:$action="seasons";
-	$movie = $_SESSION["movie"];
+	$media = $_SESSION["media"];
 ?>
 		<form>
 			<table class="vedit" id="<?php echo $showid;?>">
